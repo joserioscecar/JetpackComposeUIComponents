@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FormStudents</string>
+    <string name="title_activity_student_form">StudentFormActivity</string>
+    <string name="title_activity_student_registration">StudentRegistrationActivity</string>
+</resources>
