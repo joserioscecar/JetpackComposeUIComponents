@@ -88,27 +88,25 @@ fun CheckboxGroup(
 
 
 
-
-// DropdownField.kt
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DropdownField(
-    items: List<ComponentItem>,
-    selectedItem: ComponentItem?,
-    onItemSelected: (ComponentItem) -> Unit,
+fun <T> DropdownField(
+    items: List<T>,
+    selectedItem: T? = null,
+    onItemSelected: ((T) -> Unit)? = null,
     placeholder: String = "Selecciona una opcion",
+    itemLabel: (T) -> String = { if (it is Item) it.text else it.toString() },
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
 
     Column(modifier = modifier) {
-
         ExposedDropdownMenuBox(
             expanded = expanded,
             onExpandedChange = { expanded = !expanded }
         ) {
             OutlinedTextField(
-                value = if (selectedItem?.id.isNullOrEmpty()) "" else selectedItem.text,
+                value = selectedItem?.let { itemLabel(it) } ?: "",
                 onValueChange = {},
                 readOnly = true,
                 placeholder = { Text(placeholder) },
@@ -127,16 +125,16 @@ fun DropdownField(
                 DropdownMenuItem(
                     text = { Text(placeholder, color = MaterialTheme.colorScheme.onSurfaceVariant) },
                     onClick = {
-                        onItemSelected(ComponentItem("", placeholder))
+                        onItemSelected?.invoke(selectedItem ?: items.first())
                         expanded = false
                     },
                     contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
                 )
                 items.forEach { item ->
                     DropdownMenuItem(
-                        text = { Text(item.text) },
+                        text = { Text(itemLabel(item)) },
                         onClick = {
-                            onItemSelected(item)
+                            onItemSelected?.invoke(item)
                             expanded = false
                         },
                         contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
@@ -147,11 +145,14 @@ fun DropdownField(
     }
 }
 
+
 @Composable
-fun RadioButtonGroup(
-    items: List<ComponentItem>,
-    selectedId: String?,
-    onItemSelected: (ComponentItem) -> Unit,
+fun <T> RadioButtonGroup(
+    items: List<T>,
+    selectedItem: T? = null,
+    onItemSelected: ((T) -> Unit)? = null,
+    itemLabel: (T) -> String = { if (it is Item) it.text else it.toString() },
+    itemKey: (T) -> String = { if (it is Item) it.id else it.toString() },
     modifier: Modifier = Modifier,
     label: @Composable (() -> Unit)? = null
 ) {
@@ -163,18 +164,18 @@ fun RadioButtonGroup(
                 modifier = Modifier
                     .fillMaxWidth()
                     .selectable(
-                        selected = item.id == selectedId,
-                        onClick = { onItemSelected(item) },
+                        selected = itemKey(item) == selectedItem?.let { itemKey(it) },
+                        onClick = { onItemSelected?.invoke(item) },
                         role = Role.RadioButton
                     )
                     .padding(vertical = 4.dp)
             ) {
                 RadioButton(
-                    selected = item.id == selectedId,
+                    selected = itemKey(item) == selectedItem?.let { itemKey(it) },
                     onClick = null
                 )
                 Text(
-                    text = item.text,
+                    text = itemLabel(item),
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
@@ -184,11 +185,12 @@ fun RadioButtonGroup(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchableDropdownField(
-    items: List<ComponentItem>,
-    selectedItem: ComponentItem?,
-    onItemSelected: (ComponentItem) -> Unit,
+fun <T> SearchableDropdownField(
+    items: List<T>,
+    selectedItem: T? = null,
+    onItemSelected: ((T) -> Unit)? = null,
     placeholder: String = "Buscar...",
+    itemLabel: (T) -> String = { if (it is Item) it.text else it.toString() },
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -197,8 +199,7 @@ fun SearchableDropdownField(
     val filteredItems = remember(query) {
         if (query.isEmpty()) items
         else items.filter {
-            it.text.sinTildes()
-                .contains(query.sinTildes(), ignoreCase = true)
+            itemLabel(it).sinTildes().contains(query.sinTildes(), ignoreCase = true)
         }
     }
 
@@ -208,7 +209,7 @@ fun SearchableDropdownField(
             onExpandedChange = { expanded = !expanded }
         ) {
             OutlinedTextField(
-                value = if (expanded) query else selectedItem?.text ?: "",
+                value = if (expanded) query else selectedItem?.let { itemLabel(it) } ?: "",
                 onValueChange = {
                     query = it
                     expanded = true
@@ -243,9 +244,9 @@ fun SearchableDropdownField(
                 } else {
                     filteredItems.forEach { item ->
                         DropdownMenuItem(
-                            text = { Text(item.text) },
+                            text = { Text(itemLabel(item)) },
                             onClick = {
-                                onItemSelected(item)
+                                onItemSelected?.invoke(item)
                                 expanded = false
                                 query = ""
                             },
@@ -257,5 +258,4 @@ fun SearchableDropdownField(
         }
     }
 }
-
 

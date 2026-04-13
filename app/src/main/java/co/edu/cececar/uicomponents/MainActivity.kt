@@ -40,7 +40,7 @@ fun MainScreen(){
     val context = LocalContext.current
 
     var seleccionRadioButton by remember { mutableStateOf<ComponentItem?>(null) }
-    var seleccionDropdown by remember { mutableStateOf<ComponentItem?>(null) }
+    var tipoDocumentoSeleccionado by remember { mutableStateOf<ComponentItem?>(null) }
     var seleccionBusqueda by remember { mutableStateOf<ComponentItem?>(null) }
 
     var opciones by remember {
@@ -98,10 +98,9 @@ fun MainScreen(){
         )
 
         DropdownField(
-            items =  tiposDocumentos,
-            selectedItem = seleccionDropdown,
-            onItemSelected = { seleccionDropdown = it },
-            placeholder = "Elige un tipo de documento"
+            items = tiposDocumentos,
+            placeholder = "Elige un tipo de documento",
+     //       itemLabel = { it.text }
         )
 
         RadioButtonGroup(
@@ -111,7 +110,7 @@ fun MainScreen(){
                 ComponentItem("2", "Femenino"),
                 ComponentItem("3", "Otro")
             ),
-            selectedId = seleccionRadioButton?.id,
+            selectedItem = seleccionRadioButton,
             onItemSelected = { seleccionRadioButton = it }
 
         ){
@@ -133,7 +132,7 @@ fun MainScreen(){
         Button(onClick = {
             Toast.makeText(
                 context,
-                "ID: ${seleccionDropdown?.id} - ${seleccionDropdown?.text}" ,
+                "ID: ${tipoDocumentoSeleccionado?.id} - ${tipoDocumentoSeleccionado?.text}" ,
                 Toast.LENGTH_SHORT
             ).show()
         }) {
