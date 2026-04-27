@@ -103,6 +103,18 @@ fun MainScreen(){
      //       itemLabel = { it.text }
         )
 
+        var password by remember { mutableStateOf("") }
+
+        PasswordField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("Contraseña") },
+            placeholder = { Text("Ingresa tu contraseña") },
+            isError = password.length < 8 && password.isNotEmpty(),
+            errorMessage = "Minimo 8 caracteres"
+        )
+
+
         RadioButtonGroup(
 
             items = listOf(
