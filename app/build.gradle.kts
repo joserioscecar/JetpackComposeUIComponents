@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
+
 }
 
 android {
@@ -58,5 +60,13 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     implementation("androidx.compose.material:material-icons-extended")
+
+
+    implementation("androidx.navigation3:navigation3-runtime:1.1.0")
+    implementation("androidx.navigation3:navigation3-ui:1.1.0")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
+
+
 
 }

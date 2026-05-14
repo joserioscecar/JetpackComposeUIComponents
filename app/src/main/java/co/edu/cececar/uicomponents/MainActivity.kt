@@ -18,172 +18,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import co.edu.cececar.uicomponents.navegation.AppNavigation
+import co.edu.cececar.uicomponents.ui.screen.MainScreen
 
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // enableEdgeToEdge()
-
 
         setContent {
 
-            MainScreen()
+            AppNavigation()
         }
 
     }
-}
-
-@Composable
-fun MainScreen(){
-
-    val context = LocalContext.current
-
-    var seleccionRadioButton by remember { mutableStateOf<ComponentItem?>(null) }
-    var tipoDocumentoSeleccionado by remember { mutableStateOf<ComponentItem?>(null) }
-    var seleccionBusqueda by remember { mutableStateOf<ComponentItem?>(null) }
-
-    var opciones by remember {
-        mutableStateOf(
-            listOf(
-                CheckboxItem("1", "Acepto terminos"),
-                CheckboxItem("2", "Recibir noticias"),
-                CheckboxItem("3", "Guardar sesion")
-            )
-        )
-    }
-
-    val tiposDocumentos = listOf(
-        ComponentItem("CC", "Cédula de ciudadanía"),
-        ComponentItem("TI", "Tarjeta de identidad"),
-        ComponentItem("CE", "Cedula de Extranjería"),
-        ComponentItem("PA", "Pasaporte"))
-
-    val ciudades = listOf(
-        ComponentItem("1", "Bogotá"),
-        ComponentItem("2", "Medellin"),
-        ComponentItem("3", "Cali"),
-        ComponentItem("4", "Cartagena"),
-        ComponentItem("5", "Barranquilla"),
-        ComponentItem("6", "Bucaramanga"),
-        ComponentItem("7", "Pereira"),
-        ComponentItem("8", "Manizales"),
-        ComponentItem("9", "Santa Marta"),
-        ComponentItem("10", "Cucuta"),
-        ComponentItem("11", "Sincelejo"),
-        ComponentItem("12", "Montería")
-    )
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(25.dp)
-    ) {
-
-        Text(
-            text = "Ciudad",
-            style = MaterialTheme.typography.labelMedium,
-            modifier = Modifier.padding(bottom = 4.dp)
-        )
-        SearchableDropdownField(
-            items = ciudades,
-            selectedItem = seleccionBusqueda,
-            onItemSelected = { seleccionBusqueda = it },
-            placeholder = "Buscar ciudad..."
-        )
-        Text(
-            text = "Tipo de documento",
-            style = MaterialTheme.typography.labelMedium,
-            modifier = Modifier.padding(bottom = 4.dp)
-        )
-
-        DropdownField(
-            items = tiposDocumentos,
-            placeholder = "Elige un tipo de documento",
-     //       itemLabel = { it.text }
-        )
-
-        var password by remember { mutableStateOf("") }
-
-        PasswordField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Contraseña") },
-            placeholder = { Text("Ingresa tu contraseña") },
-            isError = password.length < 8 && password.isNotEmpty(),
-            errorMessage = "Minimo 8 caracteres"
-        )
-
-
-        RadioButtonGroup(
-
-            items = listOf(
-                ComponentItem("1", "Masculino"),
-                ComponentItem("2", "Femenino"),
-                ComponentItem("3", "Otro")
-            ),
-            selectedItem = seleccionRadioButton,
-            onItemSelected = { seleccionRadioButton = it }
-
-        ){
-            Text("Genero")
-        }
-
-        CheckboxGroup(
-            items = opciones,
-            onItemToggled = { toggled ->
-                opciones = opciones.map { item ->
-                    if (item.id == toggled.id) item.copy(checked = !item.checked)
-                    else item
-                }
-            }
-        ){
-            Text("Preferencias")
-        }
-
-        Button(onClick = {
-            Toast.makeText(
-                context,
-                "ID: ${tipoDocumentoSeleccionado?.id} - ${tipoDocumentoSeleccionado?.text}" ,
-                Toast.LENGTH_SHORT
-            ).show()
-        }) {
-            Text("Mostrar Dropdown Item")
-        }
-
-
-        Button(onClick = {
-            Toast.makeText(
-                context,
-                "ID: ${seleccionRadioButton?.id} - ${seleccionRadioButton?.text}" ,
-                Toast.LENGTH_SHORT
-            ).show()
-        }) {
-            Text("Mostrar RadioButton")
-        }
-
-        Button(onClick = {
-            Toast.makeText(
-                context,
-                "ID: ${seleccionBusqueda?.id} - ${seleccionBusqueda?.text}",
-                Toast.LENGTH_SHORT
-            ).show()
-        }) {
-            Text("Mostrar ciudad")
-        }
-
-        Button(onClick = {
-            val seleccionados = opciones.filter { it.checked }
-            val mensaje = if (seleccionados.isEmpty()) {
-                "Ninguno seleccionado"
-            } else {
-                seleccionados.joinToString(separator = "\n") { "ID: ${it.id} - ${it.text}" }
-            }
-            Toast.makeText(context, mensaje, Toast.LENGTH_LONG).show()
-        }) {
-            Text("Mostrar checks seleccionados")
-        }
-
-    }
-
 }
