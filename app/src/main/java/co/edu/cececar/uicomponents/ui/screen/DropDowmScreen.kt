@@ -15,9 +15,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import co.edu.cececar.uicomponents.ComponentItem
-import co.edu.cececar.uicomponents.DropdownField
-import co.edu.cececar.uicomponents.SearchableDropdownField
+import co.edu.cececar.uicomponents.ui.component.ComponentItem
+import co.edu.cececar.uicomponents.ui.component.DropdownField
+import co.edu.cececar.uicomponents.ui.component.SearchableDropdownField
 
 @Composable
 fun DropDowmScreen() {

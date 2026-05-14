@@ -34,6 +34,7 @@ fun MainScreen(
     onDropDowmScreen:()->Unit,
     onPasswordField:()->Unit,
     onItemList:()->Unit,
+    onAlert:()->Unit,
 
 ) {
 
@@ -88,6 +89,15 @@ fun MainScreen(
         ) {
 
             Text("ItemList")
+        }
+
+
+        Button(
+            onClick = onAlert,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+
+            Text("Alert")
         }
 
     }

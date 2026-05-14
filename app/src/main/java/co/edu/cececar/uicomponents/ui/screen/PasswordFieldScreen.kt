@@ -11,7 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import co.edu.cececar.uicomponents.PasswordField
+import co.edu.cececar.uicomponents.ui.component.PasswordField
 
 @Composable
 fun  PasswordFieldScreen(){

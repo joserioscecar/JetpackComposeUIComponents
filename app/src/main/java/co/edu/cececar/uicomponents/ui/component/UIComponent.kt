@@ -1,4 +1,4 @@
-package co.edu.cececar.uicomponents
+package co.edu.cececar.uicomponents.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

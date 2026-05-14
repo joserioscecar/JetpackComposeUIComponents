@@ -14,8 +14,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import co.edu.cececar.uicomponents.CheckboxGroup
-import co.edu.cececar.uicomponents.CheckboxItem
+import co.edu.cececar.uicomponents.ui.component.CheckboxGroup
+import co.edu.cececar.uicomponents.ui.component.CheckboxItem
 
 @Composable
 fun CheckboxGroupScreen() {

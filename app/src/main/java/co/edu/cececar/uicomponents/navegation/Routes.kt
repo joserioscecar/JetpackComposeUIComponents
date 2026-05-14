@@ -16,8 +16,8 @@ object RabioButtonRouete: NavKey
 @Serializable
 object PasswordFieldRouete: NavKey
 
-
-
+@Serializable
+object AlertRoute: NavKey
 
 @Serializable
 object ItemListRoute: NavKey
