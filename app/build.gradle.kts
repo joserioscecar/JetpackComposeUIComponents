@@ -63,7 +63,7 @@ dependencies {
 
 
     implementation("androidx.navigation3:navigation3-runtime:1.1.0")
-    implementation("androidx.navigation3:navigation3-ui:1.1.0")
+    implementation("androidx.navigation3:navigation3-ui:1.1.1")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
 

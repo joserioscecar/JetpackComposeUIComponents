@@ -21,3 +21,6 @@ object AlertRoute: NavKey
 
 @Serializable
 object ItemListRoute: NavKey
+
+
+object DatePickerRoute: NavKey

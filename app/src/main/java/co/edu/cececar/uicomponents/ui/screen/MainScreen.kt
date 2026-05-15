@@ -35,6 +35,7 @@ fun MainScreen(
     onPasswordField:()->Unit,
     onItemList:()->Unit,
     onAlert:()->Unit,
+    onDatePicker:()->Unit
 
 ) {
 
@@ -98,6 +99,15 @@ fun MainScreen(
         ) {
 
             Text("Alert")
+        }
+
+
+        Button(
+            onClick = onDatePicker,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+
+            Text("DatePicker")
         }
 
     }

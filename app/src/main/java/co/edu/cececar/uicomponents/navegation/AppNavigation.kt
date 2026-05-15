@@ -6,6 +6,7 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import co.edu.cececar.uicomponents.ui.screen.AlertScreen
 import co.edu.cececar.uicomponents.ui.screen.CheckboxGroupScreen
+import co.edu.cececar.uicomponents.ui.screen.DatePickerScreen
 import co.edu.cececar.uicomponents.ui.screen.DropDowmScreen
 import co.edu.cececar.uicomponents.ui.screen.ItemListScreen
 
@@ -29,7 +30,8 @@ fun AppNavigation() {
                     onRabioButtonScreen = {backStack.add(RabioButtonRouete)},
                     onPasswordField = {backStack.add(PasswordFieldRouete)},
                     onItemList = {backStack.add(ItemListRoute)},
-                    onAlert = {backStack.add(AlertRoute)}
+                    onAlert = {backStack.add(AlertRoute)},
+                    onDatePicker = {backStack.add(DatePickerRoute)}
 
                 )
             }
@@ -40,6 +42,7 @@ fun AppNavigation() {
             entry<PasswordFieldRouete> { PasswordFieldScreen() }
             entry<ItemListRoute> { ItemListScreen() }
             entry<AlertRoute> { AlertScreen() }
+            entry<DatePickerRoute> { DatePickerScreen() }
 
 
         })
