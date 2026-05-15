@@ -2,10 +2,11 @@ package co.edu.cececar.uicomponents.ui.screen
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -16,23 +17,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import co.edu.cececar.uicomponents.ui.component.ComponentItem
-import co.edu.cececar.uicomponents.ui.component.DropdownField
-import co.edu.cececar.uicomponents.ui.component.SearchableDropdownField
+import co.edu.cececar.uicomponents.ui.component.SelectField
+import co.edu.cececar.uicomponents.ui.component.AutocompleteField
 
 @Composable
-fun DropDowmScreen() {
+fun AutoCompleteScreen() {
 
     var tipoDocumentoSeleccionado by remember { mutableStateOf<ComponentItem?>(null) }
     var seleccionBusqueda by remember { mutableStateOf<ComponentItem?>(null) }
 
     val context = LocalContext.current
 
-    val tiposDocumentos = listOf(
-        ComponentItem("CC", "Cédula de ciudadanía"),
-        ComponentItem("TI", "Tarjeta de identidad"),
-        ComponentItem("CE", "Cedula de Extranjería"),
-        ComponentItem("PA", "Pasaporte")
-    )
 
     val ciudades = listOf(
         ComponentItem("1", "Bogotá"),
@@ -55,44 +50,30 @@ fun DropDowmScreen() {
             .padding(25.dp)
     ) {
 
-        Text(
-            text = "Ciudad",
-            style = MaterialTheme.typography.labelMedium,
-            modifier = Modifier.padding(bottom = 4.dp)
-        )
-        SearchableDropdownField(
+        // ── Ciudad ────────────────────────────────────────────────────────────
+        AutocompleteField(
             items = ciudades,
             selectedItem = seleccionBusqueda,
-            onItemSelected = { seleccionBusqueda = it },
-            placeholder = "Buscar ciudad..."
-        )
-        Text(
-            text = "Tipo de documento",
-            style = MaterialTheme.typography.labelMedium,
-            modifier = Modifier.padding(bottom = 4.dp)
-        )
-
-        DropdownField(
-            items = tiposDocumentos,
-            selectedItem = tipoDocumentoSeleccionado,
             onItemSelected = { item ->
-                tipoDocumentoSeleccionado = item
+                seleccionBusqueda = item
+
+
+                Toast.makeText(
+                    context,
+                    "ID: ${seleccionBusqueda?.id} - ${seleccionBusqueda?.text}",
+                    Toast.LENGTH_SHORT
+                ).show()
+
             },
-            placeholder = "Elige un tipo de documento",
-            itemLabel = { it.text }
+            placeholder = "Buscar ciudad...",
+            label = "Ciudad",
         )
 
+        Spacer(modifier = Modifier.height(16.dp))   // ← Spacer DESPUÉS del campo, no antes
 
-        Button(onClick = {
-            Toast.makeText(
-                context,
-                "ID: ${tipoDocumentoSeleccionado?.id} - ${tipoDocumentoSeleccionado?.text}" ,
-                Toast.LENGTH_SHORT
-            ).show()
-        }) {
-            Text("Mostrar Dropdown Item")
-        }
 
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = {
             Toast.makeText(
@@ -103,7 +84,5 @@ fun DropDowmScreen() {
         }) {
             Text("Mostrar ciudad")
         }
-
-
     }
 }

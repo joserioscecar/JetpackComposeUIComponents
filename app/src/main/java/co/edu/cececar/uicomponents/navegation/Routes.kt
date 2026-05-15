@@ -5,22 +5,18 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 object MainRouete: NavKey
-@Serializable
-object DropdownComponentRouete: NavKey
-@Serializable
+object SelectComponentRouete: NavKey
 object CheckBoxComponentRouete: NavKey
 
-@Serializable
 object RabioButtonRouete: NavKey
 
-@Serializable
 object PasswordFieldRouete: NavKey
 
-@Serializable
 object AlertRoute: NavKey
 
-@Serializable
 object ItemListRoute: NavKey
 
 
 object DatePickerRoute: NavKey
+
+object AutoCompleteRoute: NavKey

@@ -31,11 +31,12 @@ fun MainScreen(
 
     onCheckBoxScreen:()->Unit,
     onRabioButtonScreen:()->Unit,
-    onDropDowmScreen:()->Unit,
+    onSelectFielScreen:()->Unit,
+    onAutoComplete:()->Unit,
     onPasswordField:()->Unit,
     onItemList:()->Unit,
     onAlert:()->Unit,
-    onDatePicker:()->Unit
+    onDatePicker:()->Unit,
 
 ) {
 
@@ -68,11 +69,19 @@ fun MainScreen(
         }
 
         Button(
-            onClick = onDropDowmScreen,
+            onClick = onSelectFielScreen,
             modifier = Modifier.fillMaxWidth()
         ) {
 
-            Text("DropDowm")
+            Text("Select")
+        }
+
+        Button(
+            onClick = onAutoComplete,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+
+            Text("Autocomplete")
         }
 
         Button(
