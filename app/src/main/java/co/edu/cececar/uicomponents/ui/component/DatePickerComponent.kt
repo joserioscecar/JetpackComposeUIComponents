@@ -12,14 +12,7 @@ import androidx.compose.ui.unit.dp
 import java.text.SimpleDateFormat
 import java.util.*
 
-// ─────────────────────────────────────────────────────────────────────────────
-// MODELO DE CONFIGURACIÓN
-// ─────────────────────────────────────────────────────────────────────────────
 
-/**
- * Configuración centralizada del DatePickerField.
- * Crea una instancia con los parámetros que necesites y pásala al composable.
- */
 data class DatePickerConfig @OptIn(ExperimentalMaterial3Api::class) constructor(
     /** Etiqueta del campo de texto */
     val label: String = "Fecha",
@@ -53,43 +46,10 @@ data class DatePickerConfig @OptIn(ExperimentalMaterial3Api::class) constructor(
     val initialDisplayMode: DisplayMode = DisplayMode.Picker,
 )
 
-// ─────────────────────────────────────────────────────────────────────────────
-// COMPONENTE PRINCIPAL
-// ─────────────────────────────────────────────────────────────────────────────
 
-/**
- * Campo de fecha reutilizable con diálogo de Material 3.
- *
- * Uso básico:
- * ```kotlin
- * var fecha by remember { mutableStateOf<Long?>(null) }
- * DatePickerField(
- *     selectedDateMillis = fecha,
- *     onDateSelected = { fecha = it }
- * )
- * ```
- *
- * Con configuración personalizada:
- * ```kotlin
- * DatePickerField(
- *     selectedDateMillis = fecha,
- *     onDateSelected = { fecha = it },
- *     config = DatePickerConfig(
- *         label = "Fecha de nacimiento",
- *         maxDateMillis = System.currentTimeMillis(),
- *         clearable = false
- *     )
- * )
- * ```
- *
- * @param selectedDateMillis  Fecha actualmente seleccionada en milisegundos UTC, o null.
- * @param onDateSelected      Callback al confirmar. Recibe Long? (null si se limpió).
- * @param modifier            Modifier estándar de Compose.
- * @param config              Configuración del campo y del diálogo.
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DatePickerField(
+fun DatePicker(
     selectedDateMillis: Long?,
     onDateSelected: (Long?) -> Unit,
     modifier: Modifier = Modifier,
@@ -104,8 +64,6 @@ fun DatePickerField(
     val displayText = remember(selectedDateMillis, config.dateFormat) {
         selectedDateMillis?.let { dateFormatter.format(Date(it)) }
     }
-
-    // Campo de texto que abre el diálogo
     OutlinedTextField(
         value = displayText ?: "",
         onValueChange = {},
@@ -135,7 +93,7 @@ fun DatePickerField(
         },
         isError = config.errorMessage != null,
         singleLine = true,
-        // El campo completo es clickeable para abrir el picker
+
         interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() }
             .also { source ->
                 LaunchedEffect(source) {
@@ -148,7 +106,6 @@ fun DatePickerField(
             },
     )
 
-    // Diálogo del picker
     if (showDialog) {
         DatePickerFieldDialog(
             initialDateMillis = selectedDateMillis,
@@ -161,10 +118,6 @@ fun DatePickerField(
         )
     }
 }
-
-// ─────────────────────────────────────────────────────────────────────────────
-// DIÁLOGO INTERNO
-// ─────────────────────────────────────────────────────────────────────────────
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -217,28 +170,9 @@ private fun DatePickerFieldDialog(
     }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// VARIANTE: RANGO DE FECHAS
-// ─────────────────────────────────────────────────────────────────────────────
-
-/**
- * Variante para seleccionar un rango de fechas (inicio y fin).
- *
- * Uso:
- * ```kotlin
- * var rango by remember { mutableStateOf<Pair<Long?, Long?>>(null to null) }
- * DateRangePickerField(
- *     startDateMillis = rango.first,
- *     endDateMillis = rango.second,
- *     onRangeSelected = { start, end -> rango = start to end },
- *     startLabel = "Check-in",
- *     endLabel = "Check-out"
- * )
- * ```
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DateRangePickerField(
+fun DateRangePicker(
     startDateMillis: Long?,
     endDateMillis: Long?,
     onRangeSelected: (start: Long?, end: Long?) -> Unit,

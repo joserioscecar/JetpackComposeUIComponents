@@ -64,7 +64,7 @@ dependencies {
 
     implementation("androidx.compose.material:material-icons-extended")
 
-
+    implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.0")
     implementation("androidx.navigation3:navigation3-runtime:1.1.0")
     implementation("androidx.navigation3:navigation3-ui:1.1.1")
 

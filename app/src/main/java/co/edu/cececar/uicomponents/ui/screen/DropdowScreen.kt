@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -17,15 +18,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import co.edu.cececar.uicomponents.ui.component.ComponentItem
-import co.edu.cececar.uicomponents.ui.component.SelectField
-import co.edu.cececar.uicomponents.ui.component.AutocompleteField
+import co.edu.cececar.uicomponents.ui.component.Dropdow
 
 @Composable
-fun SelectScreen() {
+fun DropdowScreen() {
 
     var tipoDocumentoSeleccionado by remember { mutableStateOf<ComponentItem?>(null) }
-    var seleccionBusqueda by remember { mutableStateOf<ComponentItem?>(null) }
-
+    var tipoSangreSeleccionado by remember { mutableStateOf<String>("") }
+    var tipoRiezgo by remember { mutableStateOf<Int?>(null) }
     val context = LocalContext.current
 
     val tiposDocumentos = listOf(
@@ -48,7 +48,7 @@ fun SelectScreen() {
         Spacer(modifier = Modifier.height(16.dp))   // ← Spacer DESPUÉS del campo, no antes
 
         // ── Tipo de documento ─────────────────────────────────────────────────
-        SelectField(
+        Dropdow(
             items = tiposDocumentos,
             selectedItem = tipoDocumentoSeleccionado,
             onItemSelected = { item ->
@@ -74,6 +74,31 @@ fun SelectScreen() {
         }) {
             Text("Ver selección")
         }
+
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        val tiposDeSangre = listOf("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
+
+
+        Dropdow(
+            items = tiposDeSangre,
+            label = "Tipo de Sangre",
+            selectedItem = tipoSangreSeleccionado,
+            onItemSelected = { tipoSangreSeleccionado = it }
+        )
+
+
+        val riezgos = listOf(1, 2, 3, 4)
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Dropdow(
+            items = riezgos,
+            label = "Riesgo Laboral",
+            selectedItem = tipoRiezgo,
+            onItemSelected = { tipoRiezgo = it }
+        )
 
     }
 }

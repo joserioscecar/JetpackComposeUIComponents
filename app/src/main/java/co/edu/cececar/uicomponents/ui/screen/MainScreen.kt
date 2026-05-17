@@ -29,14 +29,17 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun MainScreen(
 
-    onCheckBoxScreen:()->Unit,
-    onRabioButtonScreen:()->Unit,
-    onSelectFielScreen:()->Unit,
-    onAutoComplete:()->Unit,
-    onPasswordField:()->Unit,
-    onItemList:()->Unit,
-    onAlert:()->Unit,
-    onDatePicker:()->Unit,
+    onCheckBoxScreen: () -> Unit,
+    onRabioButtonScreen: () -> Unit,
+    onSelectFielScreen: () -> Unit,
+    onAutoComplete: () -> Unit,
+    onPasswordField: () -> Unit,
+    onItemList: () -> Unit,
+    onAlert: () -> Unit,
+    onDatePicker: () -> Unit,
+    onSpinner: () -> Unit,
+    onMenuItem: () -> Unit,
+    onKeyValueList: () -> Unit
 
 ) {
 
@@ -73,7 +76,7 @@ fun MainScreen(
             modifier = Modifier.fillMaxWidth()
         ) {
 
-            Text("Select")
+            Text("DropDowm")
         }
 
         Button(
@@ -116,9 +119,31 @@ fun MainScreen(
             modifier = Modifier.fillMaxWidth()
         ) {
 
-            Text("DatePicker")
+            Text("DatePicker - TimePicker")
         }
 
-    }
+        Button(
+            onClick = onSpinner,
+            modifier = Modifier.fillMaxWidth()
+        ) {
 
+            Text("Spinner")
+        }
+
+        Button(
+            onClick = onMenuItem,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Menú Item")
+        }
+
+        Button(
+            onClick = onKeyValueList,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("KeyValueList")
+        }
+
+
+    }
 }

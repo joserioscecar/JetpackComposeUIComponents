@@ -17,8 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import co.edu.cececar.uicomponents.ui.component.ComponentItem
-import co.edu.cececar.uicomponents.ui.component.SelectField
-import co.edu.cececar.uicomponents.ui.component.AutocompleteField
+import co.edu.cececar.uicomponents.ui.component.AutocompleteSelect
 
 @Composable
 fun AutoCompleteScreen() {
@@ -51,7 +50,7 @@ fun AutoCompleteScreen() {
     ) {
 
         // ── Ciudad ────────────────────────────────────────────────────────────
-        AutocompleteField(
+        AutocompleteSelect(
             items = ciudades,
             selectedItem = seleccionBusqueda,
             onItemSelected = { item ->
