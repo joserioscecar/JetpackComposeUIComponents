@@ -3,12 +3,11 @@ package co.edu.cececar.uicomponents.ui.component
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -23,7 +22,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import java.text.Normalizer
 
@@ -82,16 +83,21 @@ fun <T> Autocomplete(
                 }
         )
 
-        // ← reemplaza DropdownMenu por esto
-        AnimatedVisibility(visible = expanded && filteredItems.isNotEmpty()) {
+        AnimatedVisibility(visible = expanded) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(max = 240.dp)
+                    .shadow(
+                        elevation = 1.dp,
+                        shape = RoundedCornerShape(8.dp),
+                        ambientColor = Color.Gray.copy(alpha = 0.15f),
+                        spotColor = Color.Black.copy(alpha = 0.10f)
+                    )
                     .border(
                         width = 0.5.dp,
                         color = MaterialTheme.colorScheme.outline,
-                        shape = MaterialTheme.shapes.medium
+                        shape = MaterialTheme.shapes.small
                     )
                     .background(
                         color = MaterialTheme.colorScheme.surface,
@@ -100,14 +106,17 @@ fun <T> Autocomplete(
                     .verticalScroll(rememberScrollState())
             ) {
                 if (filteredItems.isEmpty()) {
-                    Text(
-                        text = "Sin resultados",
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(16.dp)
+                    DropdownMenuItem(
+                        text = {
+                            Text(
+                                "Sin resultados",
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        },
+                        onClick = {},
+                        contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
                     )
                 } else {
-
                     filteredItems.forEach { item ->
                         DropdownMenuItem(
                             text = { Text(itemLabel(item)) },
@@ -118,7 +127,7 @@ fun <T> Autocomplete(
                                 query = ""
                                 isFocused = false
                             },
-                            contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
+                        //    contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
                         )
                     }
                 }
