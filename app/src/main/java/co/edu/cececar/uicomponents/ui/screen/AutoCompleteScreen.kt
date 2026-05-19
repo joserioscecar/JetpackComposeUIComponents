@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -17,13 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import co.edu.cececar.uicomponents.ui.component.ComponentItem
-import co.edu.cececar.uicomponents.ui.component.AutocompleteSelect
+import co.edu.cececar.uicomponents.ui.component.Autocomplete
 
 @Composable
 fun AutoCompleteScreen() {
 
-    var tipoDocumentoSeleccionado by remember { mutableStateOf<ComponentItem?>(null) }
-    var seleccionBusqueda by remember { mutableStateOf<ComponentItem?>(null) }
+    var seleccionCiudad by remember { mutableStateOf<ComponentItem?>(null) }
 
     val context = LocalContext.current
 
@@ -50,16 +50,16 @@ fun AutoCompleteScreen() {
     ) {
 
         // ── Ciudad ────────────────────────────────────────────────────────────
-        AutocompleteSelect(
+        Autocomplete(
             items = ciudades,
-            selectedItem = seleccionBusqueda,
+            selectedItem = seleccionCiudad,
             onItemSelected = { item ->
-                seleccionBusqueda = item
+                seleccionCiudad = item
 
 
                 Toast.makeText(
                     context,
-                    "ID: ${seleccionBusqueda?.id} - ${seleccionBusqueda?.text}",
+                    "ID: ${seleccionCiudad?.id} - ${seleccionCiudad?.text}",
                     Toast.LENGTH_SHORT
                 ).show()
 
@@ -71,17 +71,63 @@ fun AutoCompleteScreen() {
         Spacer(modifier = Modifier.height(16.dp))   // ← Spacer DESPUÉS del campo, no antes
 
 
-
-        Spacer(modifier = Modifier.height(16.dp))
-
         Button(onClick = {
             Toast.makeText(
                 context,
-                "ID: ${seleccionBusqueda?.id} - ${seleccionBusqueda?.text}",
+                "ID: ${seleccionCiudad?.id} - ${seleccionCiudad?.text}",
                 Toast.LENGTH_SHORT
             ).show()
         }) {
             Text("Mostrar ciudad")
         }
+
+        val profesiones = listOf(
+            "Ingeniero",
+            "Doctor",
+            "Abogado",
+            "Profesor",
+            "Arquitecto",
+            "Diseñador",
+            "Programador",
+            "Contador",
+            "Administrador",
+            "Enfermero",
+            "Psicólogo",
+            "Odontólogo",
+            "Electricista",
+            "Mecánico",
+            "Chef",
+            "Periodista",
+            "Fotógrafo",
+            "Policía",
+            "Bombero",
+            "Veterinario"
+        )
+
+        HorizontalDivider()
+
+        var seleccionProfesion by remember { mutableStateOf<String?>(null) }
+
+        Autocomplete(
+            items = profesiones,
+            selectedItem = seleccionProfesion,
+            onItemSelected = { item ->
+                seleccionProfesion = item
+
+                Toast.makeText(
+                    context,
+                    seleccionProfesion,
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            },
+            placeholder = "Buscar profesión...",
+            label = "Profesión",
+        )
+
     }
+
+
+
+
 }
