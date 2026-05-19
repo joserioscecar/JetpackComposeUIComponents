@@ -10,7 +10,6 @@ import co.edu.cececar.uicomponents.ui.screen.AutoCompleteScreen
 import co.edu.cececar.uicomponents.ui.screen.CheckboxGroupScreen
 import co.edu.cececar.uicomponents.ui.screen.DatePickerScreen
 import co.edu.cececar.uicomponents.ui.screen.DropdowScreen
-import co.edu.cececar.uicomponents.ui.screen.ItemListScreen
 import co.edu.cececar.uicomponents.ui.screen.KeyValueListScreen
 
 import co.edu.cececar.uicomponents.ui.screen.MainScreen
@@ -31,10 +30,9 @@ fun AppNavigation() {
 
                 MainScreen(
                     onCheckBoxScreen = {backStack.add(CheckBoxComponentRouete)},
-                    onSelectFielScreen = {backStack.add(SelectComponentRouete)},
-                    onRabioButtonScreen = {backStack.add(RabioButtonRouete)},
+                    onDropDownScreen = {backStack.add(DropDowmComponentRouete)},
+                    onRadioButtonScreen = {backStack.add(RabioButtonRouete)},
                     onPasswordField = {backStack.add(PasswordFieldRouete)},
-                    onItemList = {backStack.add(ItemListRoute)},
                     onAlert = {backStack.add(AlertRoute)},
                     onDatePicker = {backStack.add(DatePickerRoute)},
                     onAutoComplete = {backStack.add(AutoCompleteRoute)},
@@ -46,10 +44,9 @@ fun AppNavigation() {
             }
 
             entry<CheckBoxComponentRouete> { CheckboxGroupScreen() }
-            entry<SelectComponentRouete> { DropdowScreen() }
+            entry<DropDowmComponentRouete> { DropdowScreen() }
             entry<RabioButtonRouete> { RadioButtonGroupScreen() }
             entry<PasswordFieldRouete> { PasswordFieldScreen() }
-            entry<ItemListRoute> { ItemListScreen() }
             entry<AlertRoute> { AlertScreen() }
             entry<DatePickerRoute> { DatePickerScreen() }
             entry<AutoCompleteRoute> { AutoCompleteScreen() }
