@@ -21,11 +21,13 @@ import co.edu.cececar.uicomponents.ui.component.NumberField
 import co.edu.cececar.uicomponents.ui.component.NumberFieldConfig
 import co.edu.cececar.uicomponents.ui.component.NumberType
 import co.edu.cececar.uicomponents.ui.component.PasswordField
+import co.edu.cececar.uicomponents.ui.component.SearchField
+import co.edu.cececar.uicomponents.ui.component.SearchFieldConfig
 import co.edu.cececar.uicomponents.ui.component.formatThousands
 import co.edu.cececar.uicomponents.ui.component.isValidEmail
 
 @Composable
-fun  PasswordFieldScreen(){
+fun PasswordFieldScreen() {
 
 
     var password by remember { mutableStateOf("") }
@@ -52,18 +54,18 @@ fun  PasswordFieldScreen(){
         Text("NumberField")
 
         var cantidad by remember { mutableStateOf<Int?>(null) }
-        var precio   by remember { mutableStateOf<Double?>(null) }
-        var salario  by remember { mutableStateOf<Double?>(null) }
+        var precio by remember { mutableStateOf<Double?>(null) }
+        var salario by remember { mutableStateOf<Double?>(null) }
 
 // Entero con min/max
         NumberField(
             value = cantidad,
             onValueChange = { cantidad = it as? Int },
             config = NumberFieldConfig(
-                label    = "Cantidad",
+                label = "Cantidad",
                 minValue = 1.0,
                 maxValue = 9999.0,
-                suffix   = "und"
+                suffix = "und"
             )
         )
 
@@ -72,10 +74,10 @@ fun  PasswordFieldScreen(){
             value = precio,
             onValueChange = { precio = it?.toDouble() },
             config = NumberFieldConfig(
-                label      = "Precio",
+                label = "Precio",
                 numberType = NumberType.Decimal(decimals = 2),
-                minValue   = 0.0,
-                prefix     = "$"
+                minValue = 0.0,
+                prefix = "$"
             )
         )
 
@@ -97,7 +99,6 @@ fun  PasswordFieldScreen(){
         println(cantidad)               // 150
         println(precio)                 // 3500.0
         println(salario?.formatThousands()) // "2.500.000"
-
 
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -130,6 +131,26 @@ fun  PasswordFieldScreen(){
             }
         }) {
             Text("Enviar")
+        }
+
+
+        var query by remember { mutableStateOf("") }
+        var resultado by remember { mutableStateOf("") }
+
+        SearchField(
+            value = query,
+            onValueChange = { query = it },
+            onSearch = { texto ->
+                resultado = "Buscando: $texto"
+            },
+            config = SearchFieldConfig(
+                placeholder = "Buscar.."
+            )
+        )
+
+// Mostrar resultado
+        if (resultado.isNotEmpty()) {
+            Text(resultado)
         }
 
     }
