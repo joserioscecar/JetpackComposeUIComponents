@@ -8,7 +8,7 @@ object MainRouete: NavKey
 object DropDowmComponentRouete: NavKey
 object CheckBoxComponentRouete: NavKey
 object RabioButtonRouete: NavKey
-object PasswordFieldRouete: NavKey
+object InputFieldRouete: NavKey
 object AlertRoute: NavKey
 object ItemListRoute: NavKey
 object DatePickerRoute: NavKey

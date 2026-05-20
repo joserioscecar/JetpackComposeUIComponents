@@ -32,7 +32,7 @@ fun AppNavigation() {
                     onCheckBoxScreen = {backStack.add(CheckBoxComponentRouete)},
                     onDropDownScreen = {backStack.add(DropDowmComponentRouete)},
                     onRadioButtonScreen = {backStack.add(RabioButtonRouete)},
-                    onPasswordField = {backStack.add(PasswordFieldRouete)},
+                    onFieldScreen = {backStack.add(InputFieldRouete)},
                     onAlert = {backStack.add(AlertRoute)},
                     onDatePicker = {backStack.add(DatePickerRoute)},
                     onAutoComplete = {backStack.add(AutoCompleteRoute)},
@@ -46,7 +46,7 @@ fun AppNavigation() {
             entry<CheckBoxComponentRouete> { CheckboxGroupScreen() }
             entry<DropDowmComponentRouete> { DropdowScreen() }
             entry<RabioButtonRouete> { RadioButtonGroupScreen() }
-            entry<PasswordFieldRouete> { PasswordFieldScreen() }
+            entry<InputFieldRouete> { PasswordFieldScreen() }
             entry<AlertRoute> { AlertScreen() }
             entry<DatePickerRoute> { DatePickerScreen() }
             entry<AutoCompleteRoute> { AutoCompleteScreen() }
