@@ -10,9 +10,8 @@ object CheckBoxComponentRouete: NavKey
 object RabioButtonRouete: NavKey
 object InputFieldRouete: NavKey
 object AlertRoute: NavKey
-object ItemListRoute: NavKey
 object DatePickerRoute: NavKey
 object AutoCompleteRoute: NavKey
 object SpinnerRoute: NavKey
 object MenuItemRoute: NavKey
-object KeyValueListRoute: NavKey
+object DataListRoute: NavKey

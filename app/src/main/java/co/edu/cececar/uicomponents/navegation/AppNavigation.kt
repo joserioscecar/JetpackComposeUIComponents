@@ -38,7 +38,7 @@ fun AppNavigation() {
                     onAutoComplete = {backStack.add(AutoCompleteRoute)},
                     onSpinner = {backStack.add(SpinnerRoute)},
                     onMenuItem = {backStack.add(MenuItemRoute)},
-                    onKeyValueList = {backStack.add(KeyValueListRoute)}
+                    onDataList = {backStack.add(DataListRoute)}
 
                 )
             }
@@ -52,7 +52,7 @@ fun AppNavigation() {
             entry<AutoCompleteRoute> { AutoCompleteScreen() }
             entry<SpinnerRoute> { SpinnerScreen() }
             entry<MenuItemRoute> { MenuItemScreen() }
-            entry<KeyValueListRoute> { KeyValueListScreen() }
+            entry<DataListRoute> { KeyValueListScreen() }
 
         })
 }

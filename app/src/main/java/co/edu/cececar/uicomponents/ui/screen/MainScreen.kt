@@ -25,7 +25,7 @@ fun MainScreen(
     onDatePicker: () -> Unit = {},
     onSpinner: () -> Unit = {},
     onMenuItem: () -> Unit = {},
-    onKeyValueList: () -> Unit = {}
+    onDataList: () -> Unit = {}
 ) {
     // Lista de items para mejor mantenibilidad
     val menuItems = listOf(
@@ -38,7 +38,7 @@ fun MainScreen(
         "DatePicker - TimePicker" to onDatePicker,
         "Spinner" to onSpinner,
         "Menu Item" to onMenuItem,
-        "KeyValueList" to onKeyValueList
+        "DataList" to onDataList
     )
 
     LazyColumn(
